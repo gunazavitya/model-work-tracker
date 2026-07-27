@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model's Work Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 class="headerTitle">Model's Best Friend</h1>
+    </header>
+    <main class="container">
+        <section id="contractStatistics">
+            <div class="statsCards" id="daysCounter">
+                <h2 class="sectionTitle">Total days</h2>
+                <div class="dayStats">
+                    <div>
+                        <p class="statLabel">Days on contract:</p>
+                        <p class="statValue" id="currentDay">35</p>
+                    </div>
+                    <div>
+                        <p class="statLabel">Days left:</p>
+                        <p class="statValue" id="remainingDays">55</p>
+                    </div>
+                </div>
+            </div>
+            <div class="statsCards" id="guaranteeCounter">
+                <h2 class="sectionTitle">Guarantee</h2>
+                <div class="guaranteeStats">
+                    <div>
+                        <p class="statLabel">Guarantee:</p>
+                        <p class="statValue" id="currentGuarantee">0€</p>
+                    </div>
+                    <div>
+                        <p class="statLabel">Guarantee exceed:</p>
+                        <p class="positive" id="exceedGuarantee">0€</p>
+                    </div>
+                </div>
+            </div>
+            <div class="statsCards" id="balanceCounter">
+                <h2 class="sectionTitle">Total balance</h2>
+                <div class="balanceStats">
+                    <div>
+                        <p class="statLabel">Balance:</p>
+                        <p class="statValue" id="currentBalance">0€</p>
+                    </div>
+                    <div>
+                        <p class="statLabel">This month:</p>
+                        <p class="statValue" id="monthBalance">0€</p>
+                    </div>
+                    <div>
+                        <p class="statLabel">Average:</p>
+                        <p class="statValue" id="averageBalance">0€</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="workForm">
+            <form id="workForm">
+                <h2 class="sectionTitle">Add New Work</h2>
+                <div class="newWorkForm" id="newWorkForm">
+                    <div class="newWorkContainer" id="mainNewWorkContainer">
+                        <label for="workType">Select type of new work:</label>
+                        <select name="workType" id="workType">
+                            <option value="shooting">Shooting</option>
+                            <option value="show">Show</option>
+                        </select>
+                        <label for="workDate">Date:</label>
+                        <input type="date" id="workDate">
+                        <label for="brandName">Brand name:</label>
+                        <input type="text" id="brandName">
+                    </div>
+                    <div class="newWorkContainer" id="outsideContainer">
+                        <label for="outsideRate">Outside price:</label>
+                        <input type="number" id="outsideRate">
+                        <label for="outsideHours">Outside hours:</label>
+                        <input type="number" id="outsideHours">
+                    </div>
+                    <div class="newWorkContainer" id="shootingContainer">
+                        <label for="shootingHours">Hours:</label>
+                        <input type="number" id="shootingHours">
+                        <label for="hourlyRate">Price:</label>
+                        <input type="number" id="hourlyRate">
+                        <div class="checkboxRow" id="checkboxContainer">
+                            <label for="outsideChecker">Outside </label>
+                            <input type="checkbox" id="outsideChecker">
+                        </div>
+                    </div>
+                    <div class="newWorkContainer" id="showContainer">
+                        <label for="fixedPayment">Price:</label>
+                        <input type="number" id="fixedPayment">
+                    </div>
+                        <button type="submit" id="workSubmit">Add new work</button>
+                </div>
+            </form>
+        </section>
+        <section id="workHistory">
+            <h2 class="historyTitle">Work History</h2>
+            <div class="historyHeader">
+                <span>Date</span>
+                <span>Brand name</span>
+                <span>Type</span>
+                <span>Total</span>
+                <span>🗑</span>
+            </div>
+        </section>
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>
