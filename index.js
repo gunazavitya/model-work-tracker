@@ -376,7 +376,7 @@ function updateDaysCounter(){
 
 function deleteWork(id){
 
-    const index = works.findIndex(work => work.id === targetId);
+    const index = works.findIndex(work => work.id === id);
 
     if(index !== -1){
         works.splice(index, 1);
