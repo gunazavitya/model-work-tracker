@@ -67,6 +67,10 @@ function resetShootingFields(){
     outsideHoursInput.value = "";
     outsideRateInput.value = "";
     outsideChecker.checked = false;
+
+    outsideForm.style.display = "none";
+
+    newWorkForm.classList.remove("outside-layout");
 }
 
 function resetShowFields(){
