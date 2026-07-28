@@ -2,7 +2,7 @@
 // [ ] workType change
 // [ ] outside checkbox
 // [ ] show/hide containers
-
+console.log("VERSION 1.0.1");
 const workTypeInput = document.getElementById("workType");
 const shootingForm = document.getElementById("shootingContainer");
 const showForm = document.getElementById("showContainer");
