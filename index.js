@@ -2,7 +2,7 @@
 // [ ] workType change
 // [ ] outside checkbox
 // [ ] show/hide containers
-console.log("VERSION 1.0.1");
+
 const workTypeInput = document.getElementById("workType");
 const shootingForm = document.getElementById("shootingContainer");
 const showForm = document.getElementById("showContainer");
@@ -210,14 +210,18 @@ function renderWork(work){
     newDiv.classList.add("historyBody");
 
     newDiv.innerHTML = `
-        <p> ${work.date} </p>
-        <p> ${capitalize(work.brand)} </p>
-        <p> ${capitalize(work.type)} </p>
-        <p> ${work.total}¥ </p>
-        <button class="deleteBtn">🗑</button>
+        <p class="workDate"> ${work.date} </p>
+        <p class="workBrand"> ${capitalize(work.brand)} </p>
+        <p class="workType"> ${capitalize(work.type)} </p>
+        <p class="workTotal"> ${work.total}¥ </p>
+        <div>
+        <button class="deleteBtn">🗑️</button>
+        <button class="editBtn">✏️</button>
+        </div>
     `;
     
     const deleteBtn = newDiv.querySelector(".deleteBtn");
+    const editBtn = newDiv.querySelector(".editBtn");
 
     deleteBtn.addEventListener("click", () => {
         deleteWork(work.id);
@@ -225,6 +229,10 @@ function renderWork(work){
         updateStats();
         console.log(works);
         historyContainer.removeChild(newDiv);
+    });
+
+    editBtn.addEventListener("click", () => {
+        editWork(work, newDiv);
     });
 
     historyContainer.appendChild(newDiv);
@@ -379,13 +387,70 @@ function updateDaysCounter(){
 }
 
 function deleteWork(id){
-
     const index = works.findIndex(work => work.id === id);
 
     if(index !== -1){
         works.splice(index, 1);
     }
 }
+
+function editWork(work, newDiv){
+    const editBtn = newDiv.querySelector(".editBtn");
+
+    const workDate = newDiv.querySelector(".workDate");
+    const workBrand = newDiv.querySelector(".workBrand");
+
+   
+    if(editBtn.textContent === '✏️'){
+        enterEditMode(workDate, workBrand, editBtn);
+    } else if(editBtn.textContent === '📝'){
+        saveEditedWork(work, newDiv, editBtn);
+    }
+    
+}
+
+function enterEditMode(workDate, workBrand, editBtn){
+        const newWorkDateInput = document.createElement('input');
+        newWorkDateInput.type = 'date';
+        newWorkDateInput.value = workDate.textContent;
+        newWorkDateInput.classList.add('newWorkDateInput');
+
+        workDate.replaceWith(newWorkDateInput);
+
+        const newWorkBrandInput = document.createElement('input');
+        newWorkBrandInput.type = 'text';
+        newWorkBrandInput.value = workBrand.textContent;
+        newWorkBrandInput.classList.add('newWorkBrandInput');
+
+        workBrand.replaceWith(newWorkBrandInput);
+
+        editBtn.textContent = '📝';
+}
+
+function saveEditedWork(work, newDiv, editBtn){
+        const newWorkDateInput = newDiv.querySelector('.newWorkDateInput');
+        work.date = newWorkDateInput.value;
+
+        const newWorkDate = document.createElement('p');
+        newWorkDate.classList.add('workDate');
+        newWorkDate.textContent = `${work.date}`;
+
+        newWorkDateInput.replaceWith(newWorkDate);
+
+        const newWorkBrandInput = newDiv.querySelector('.newWorkBrandInput');
+        work.brand = newWorkBrandInput.value;
+
+        const newWorkBrand = document.createElement('p');
+        newWorkBrand.classList.add('workBrand');
+        newWorkBrand.textContent = `${capitalize(work.brand)}`;
+
+        newWorkBrandInput.replaceWith(newWorkBrand);
+
+        editBtn.textContent = '✏️';
+
+        console.log(work);
+}
+
 
 updateDaysCounter();
 updateCurrentGuarantee();
