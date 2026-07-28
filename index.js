@@ -148,7 +148,7 @@ function createShooting(commonData){
                     return;
                 }
                 else{
-                total = ((hours - outsideHours) * rate) + (outsideHours * (rate + outsideRate));
+                total = ((hours - outsideHours) * rate) + (outsideHours * (rate + outsideRate)) / 2;
                 }
             } else if(hours <= 0 || rate <= 0){
                 alert("Enter work hours and rate!");
