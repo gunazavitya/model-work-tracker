@@ -241,6 +241,14 @@ section{
     grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
 }
 
+#worksSort{
+    width: 100px;
+}
+
+#worksList{
+    margin: 5px;
+}
+
 .historyBody{
     padding:10px 0;
     border-bottom:1px solid #E5E7EB;
@@ -256,6 +264,9 @@ section{
     text-align: center;
 }
 
+.historyBody button{
+    width: 40px;
+}
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
