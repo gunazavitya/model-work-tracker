@@ -203,7 +203,7 @@ function createShow(commonData){
 
 const works = [];
 
-const historyContainer = document.getElementById("workHistory");
+const worksList = document.getElementById("worksList");
 
 function renderWork(work){
     const newDiv = document.createElement("div");
@@ -227,15 +227,14 @@ function renderWork(work){
         deleteWork(work.id);
         saveWorks();
         updateStats();
-        console.log(works);
-        historyContainer.removeChild(newDiv);
+        worksList.removeChild(newDiv);
     });
 
     editBtn.addEventListener("click", () => {
         editWork(work, newDiv);
     });
 
-    historyContainer.appendChild(newDiv);
+    worksList.appendChild(newDiv);
 }
 
 function clearForm(){
@@ -261,6 +260,7 @@ const exceedGuarantee = document.getElementById("exceedGuarantee");
 const currentBalance = document.getElementById("currentBalance");
 const monthBalance = document.getElementById("monthBalance");
 const averageBalance = document.getElementById("averageBalance");
+const monthWorks = document.getElementById("monthWorks");
 
 const currentDay = document.getElementById("currentDay");
 const remainingDays = document.getElementById("remainingDays");
@@ -311,6 +311,27 @@ function updateMonthBalance(){
     monthBalance.textContent = `${(monthTotal / 8).toFixed(0)}€`;
 }
 
+function updateMonthWorks(){
+    let monthTotal = 0;
+
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+
+    for (const work of works){
+        const workDate = new Date(work.date);
+
+        if (
+            workDate.getMonth() === currentMonth &&
+            workDate.getFullYear() === currentYear
+        ){
+            monthTotal ++;;
+        }
+    }
+
+    monthWorks.textContent = `${monthTotal}`;
+}
+
 function updateGuarantee(total){
     const excGuarantee = total - updateCurrentGuarantee();
 
@@ -330,6 +351,7 @@ function updateStats(){
         updateAverageBalance(total);
         updateMonthBalance();
         updateGuarantee(total);
+        updateMonthWorks();
 }
 // DAY 5
 // [ ] save to localStorage
@@ -448,9 +470,43 @@ function saveEditedWork(work, newDiv, editBtn){
 
         editBtn.textContent = '✏️';
 
-        console.log(work);
 }
 
+//UPDATES
+
+//Sort
+const workSortSelect = document.getElementById("worksSort");
+
+workSortSelect.addEventListener("click", () => {
+
+    if (workSortSelect.value === "newest") {
+        works.sort((a, b) =>{
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            
+            return dateB - dateA;
+        })
+    }
+
+    if (workSortSelect.value === "oldest") {
+        works.sort((a, b)=>{
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+
+            return dateA - dateB;
+        })
+    }
+
+    renderAllWorks();
+})
+
+function renderAllWorks(){
+    worksList.innerHTML = ``;
+
+    for (work of works){
+        renderWork(work);
+    }
+}
 
 updateDaysCounter();
 updateCurrentGuarantee();
