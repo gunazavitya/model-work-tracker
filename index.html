@@ -53,6 +53,10 @@
                         <p class="statLabel">Average:</p>
                         <p class="statValue" id="averageBalance">0€</p>
                     </div>
+                    <div>
+                        <p class="statLabel">Works this month:</p>
+                        <p class="statValue" id="monthWorks">0</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -97,12 +101,19 @@
         </section>
         <section id="workHistory">
             <h2 class="historyTitle">Work History</h2>
+            <select name="worksSort" id="worksSort">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+            </select>
             <div class="historyHeader">
                 <span>Date</span>
                 <span>Brand name</span>
                 <span>Type</span>
                 <span>Total</span>
                 <span></span>
+            </div>
+            <div id="worksList">
+
             </div>
         </section>
     </main>
